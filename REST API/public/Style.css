@@ -1,0 +1,12 @@
+div {
+  border: 2px solid black;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+h1 {
+  color: brown;
+}

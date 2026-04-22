@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Posts</title>
+    <link href="Style.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Quora</h1>
+    <% for(let i=0;i<Databace.length;i++){   %>
+        <div>
+            <h3>Username:<%= Databace[i].username %> </h3>
+            <h4>Content:<%=Databace[i].content %></h4>
+            <form action="/Posts/<%= Databace[i].id %>" method="get">
+                <button type="submit">show</button>
+            </form>
+            <form action="/Posts/<%= Databace[i].id %>/Edit" >
+                <button>Edit Post</button>
+            </form>
+            <form action="/Posts/<%= Databace[i].id %>?_method=delete" method="post">
+                <button>Delete!</button>
+            </form>
+        </div>
+        
+
+        <%}%>
+      
+    <form action="http://localhost:3000/posts/New" method="get">
+        <button>Add An Post </button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<% include("includes / head.ejs"); %>
+<body>
+    <h1>Accounts That Follow You !</h1>
+    <ul>
+    <% for(let i=0;i<followers.length;i++){ %>
+       <li>Name : <%= followers[i] %> </li>
+    <%}%>
+    </ul>
+</body>
+</html>

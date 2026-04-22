@@ -1,0 +1,17 @@
+<%- include("includes/head.ejs"); %>
+  <body>
+    <h1>This Page Is Belongs To <%= userdata.name %></h1>
+    <h3 .style.display="inline">Follwers :</h3>
+    <%=userdata.followers %>
+    <h3 .style.display="inline">Following:</h3>
+    <%=userdata.following %>
+    <hr />
+    <% for(let i=0;i<userdata.posts.length;i++){ %>
+        
+      <img src="<%= userdata.posts[i].image %>">
+      <p><b>Likes:</b><%= userdata.posts[i].likes%> </p>
+        <p><b>Comments:</b><%= userdata.posts[i].likes %> </p>
+    <% } %>
+    <%- include("includes/footer.ejs") %>;
+  </body>
+</html>
