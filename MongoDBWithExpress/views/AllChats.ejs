@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini WhatsApp</title>
+  </head>
+  <body>
+    <div><h1>All Chats In An DataBase!</h1></div>
+    <% for(let i=0;i<AllChats.length;i++){ %>
+        <div style="background-color: lightblue;border-radius: 10px;padding-left:10px;
+        margin:9px">
+            <h2>Message : <%=i%></h2> 
+     <div>
+        <h3>From:</h3><%=AllChats[i].from%>
+     </div>
+    <div>
+        <h3>To:</h3><%=AllChats[i].to%>
+        
+     </div>
+   <div>
+        <h3 style="background-color: blueviolet;">Message:</h3><%=AllChats[i].msg%>
+     </div>
+  <div>
+        <h3>Time Stamp</h3><%=AllChats[i].createdAt %>
+    </div>
+</div>
+    <%}%>
+    <form action="http://localhost:3000/Chats/new" method="get">
+    <button>Add Msg</button>
+    </form>
+    
+    
+  </body>
+</html>
