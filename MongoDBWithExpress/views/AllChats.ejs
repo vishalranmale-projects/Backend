@@ -20,14 +20,29 @@
      </div>
    <div>
         <h3 style="background-color: blueviolet;">Message:</h3><%=AllChats[i].msg%>
+        <form action="/Chats/<%=AllChats[i]._id%>/edit" method="get">
+      <button>Edit!</button>
+    </form>
      </div>
   <div>
-        <h3>Time Stamp</h3><%=AllChats[i].createdAt %>
+        <h3>Time Stamp:</h3><%=AllChats[i].created_At.toString().split(" ")[4] %>
     </div>
+    <div>
+      <h3>Date</h3><%=AllChats[i].created_At.toString().split(" ").slice(0,4) %>
+    </div>
+    <div>
+      <h3>Last Modified:</h3><%=AllChats[i].updated_At %>
+    </div>
+    <div><form action="/Chats/<%=AllChats[i]._id%>?_method=delete" method="post">
+      <button>Delete Chat!</button>
+    </form></div>
 </div>
     <%}%>
     <form action="http://localhost:3000/Chats/new" method="get">
     <button>Add Msg</button>
+    </form>
+    <form action="http://localhost:3000/Chats/deleteAll?_method=delete" method="post">
+      <button>Delete All!</button>
     </form>
     
     

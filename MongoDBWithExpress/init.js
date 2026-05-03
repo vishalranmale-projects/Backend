@@ -18,31 +18,31 @@ Chats.insertMany([
     from: "Vishal",
     to: "Aniket",
     msg: "Hii How Are You?",
-    createdAt: new Date(),
+    created_At: new Date(),
   },
   {
     from: "Aniket",
     to: "Vishal",
     msg: "Hii I Am Fine!",
-    createdAt: new Date(),
+    created_At: new Date(),
   },
   {
     from: "Vishal",
     to: "Mayuri",
     msg: "Hii Mayuri How Are You?",
-    createdAt: new Date(),
+    created_At: new Date(),
   },
   {
     from: "Mayuri",
     to: "Vishal",
     msg: "Hii Vishal I Am Fine!",
-    createdAt: new Date(),
+    created_At: new Date(),
   },
   {
     from: "Aniket",
     to: "Mayuri",
     msg: "Hii Mayuri How Are You?",
-    createdAt: new Date(),
+    created_At: new Date(),
   },
 ]).then((res) => {
   console.log("Inserted chats:", res);

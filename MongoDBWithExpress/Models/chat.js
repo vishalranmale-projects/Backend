@@ -24,6 +24,9 @@ const chatScheema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  updated_At:{
+    type:String,
+  }
 });
 
 const Chats = new mongoose.model("Chats", chatScheema);
