@@ -1,8 +1,9 @@
 // 1)Importing An Express Module
 const express = require("express");
 const methodOverride = require("method-override");
+const ExpressErrors = require("./ExpressError");
 
-//
+
 // 2)Creating An Express App
 const app = express();
 app.use(methodOverride("_method"));
@@ -23,7 +24,13 @@ app.listen(3000, () => {
   console.log("Connection Is Sucessful!");
 });
 app.get("/Chats", async (req, res) => {
-  let AllChats = await Chats.find();
+  try{
+ let AllChats = await Chats.find();
+  }
+  catch(err){
+    next(err);
+  }
+ 
   res.render("AllChats.ejs", { AllChats });
 });
 
@@ -31,15 +38,20 @@ app.get("/Chats/new", (req, resp) => {
   resp.render("newChat.ejs");
 });
 
-app.post("/Chats", (req, resp) => {
-  let ChatUpd = new Chats({
+app.post("/Chats", async(req, resp,next) => {
+  try{
+     let ChatUpd = new Chats({
     from: req.body.from,
     to: req.body.to,
     msg: req.body.msg2,
     createdAt: new Date(),
-  });
-  ChatUpd.save();
-  resp.redirect("http://localhost:3000/Chats");
+     });
+   await ChatUpd.save();
+  }
+  catch(err){
+    next( new ExpressErrors("Please Fill The All The Mandatory Fields!",403));
+  }
+  
 });
 app.get("/Chats/:id/edit", (req, resp) => {
   let id = req.params.id;
@@ -49,16 +61,43 @@ app.get("/Chats/:id/edit", (req, resp) => {
 app.put("/Chats/:id", async(req, resp) => {
   let id = req.params.id;
   let Msg = req.body.UpdatedMsg;
-  await Chats.updateOne({ _id: id }, {$set:{msg:Msg} },{updated_At:new Date().toString().split(" ")[4]});
+  try{
+ await Chats.updateOne({ _id: id }, {$set:{msg:Msg} },{updated_At:new Date().toString().split(" ")[4]});
   resp.redirect("/Chats");
+  }
+  catch(err){
+   resp.send(err.message);
+  }
 });
 
 app.delete("/Chats/:id",async(req,resp)=>{
   let id = req.params.id;
-  await Chats.deleteOne({_id:id})
-    resp.redirect("/Chats");
+  try{
+ await Chats.deleteOne({_id:id})
+  }
+  catch(err){
+    next(err);
+  }
+  resp.redirect("/Chats");
   })
 
   app.delete("/Chats/deleteAll",(req,resp)=>{
     resp.send("All Deleted!");
-  })
+  });
+  app.get("/Chats/:id/Show",async(req,resp,next)=>{
+   let id = req.params.id;
+   let chat = await Chats.findById(id);
+    if(chat){
+      resp.render("show.ejs",{chat});
+    }
+    else{
+      
+   throw new ExpressErrors("The id U Are Finding is Invalid!",403);
+      next(err);
+    }
+  });
+
+  app.use((err,req,resp,next)=>{
+  let {status=500,message = "Some Error"} = err;
+  resp.status(status).send(message);
+  });

@@ -36,6 +36,9 @@
     <div><form action="/Chats/<%=AllChats[i]._id%>?_method=delete" method="post">
       <button>Delete Chat!</button>
     </form></div>
+    <form action="/Chats/<%=AllChats[i]._id%>/Show" method="get">
+      <button>Show</button>
+    </form>
 </div>
     <%}%>
     <form action="http://localhost:3000/Chats/new" method="get">
@@ -44,7 +47,7 @@
     <form action="http://localhost:3000/Chats/deleteAll?_method=delete" method="post">
       <button>Delete All!</button>
     </form>
-    
+     
     
   </body>
 </html>
